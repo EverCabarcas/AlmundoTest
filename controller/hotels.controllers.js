@@ -40,11 +40,57 @@ exports.gethotelforstars = function (req, res, next) {
         });
     }else{
         return res.status(200).json({
-            response: hotels
+            data: hotels
         });
     }
 
 
 
+
+};
+
+exports.createhotel = function (req, res, next) {
+  data.push({
+      id : req.body.id,
+      name: req.body.name,
+      stars: req.body.stars,
+      price: req.body.price,
+      image: req.body.image,
+      amenities: req.body.amenities
+  });
+
+  return res.status(200).json({
+     data: data
+    });
+};
+
+exports.updatehotel = function (req, res, next) {
+ let indice = data.map(function (element) {
+     return element.id;
+ }).indexOf(req.params.id);
+
+    data[indice].id = req.body.id;
+    data[indice].name = req.body.name;
+    data[indice].stars = req.body.stars;
+    data[indice].price = req.body.price;
+    data[indice].image = req.body.image;
+    data[indice].amenities = req.body.amenities;
+
+  res.status(200).json({
+      data: data
+  });
+
+};
+
+exports.deletehotel = function (req, res, next) {
+  let indice = data.map(function (element) {
+        return element.id;
+    }).indexOf(req.params.id);
+
+  data.splice(indice, 1);
+
+    res.status(200).json({
+        data: data
+    });
 
 };
